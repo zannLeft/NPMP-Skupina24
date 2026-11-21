@@ -49,4 +49,21 @@ plt.tight_layout()
 plt.savefig(slike / "izboljsanje_sum.pdf")
 plt.savefig(slike / "izboljsanje_sum.png", dpi=200)
 
+
+
+pragi = pd.read_csv(pot / "results" / "pragi.csv")
+
+plt.figure(figsize=(7, 4.5))
+
+plt.plot(pragi["f_vhod"], pragi["prag_suma"], marker="o")
+
+plt.xlabel("Zacetna zvestoba")
+plt.ylabel("Mejni sum CNOT (lambda)")
+plt.title("Mejna stopnja suma za uspesno ociscevanje")
+plt.grid(alpha=0.3)
+plt.tight_layout()
+
+plt.savefig(slike / "pragi_suma.pdf")
+plt.savefig(slike / "pragi_suma.png", dpi=200)
+
 plt.show()
