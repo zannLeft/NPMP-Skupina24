@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
+import numpy as np
 
 pot = Path(__file__).resolve().parent.parent
 podatki = pd.read_csv(pot / "results" / "poskusi.csv")
@@ -55,11 +56,18 @@ pragi = pd.read_csv(pot / "results" / "pragi.csv")
 
 plt.figure(figsize=(7, 4.5))
 
-plt.plot(pragi["f_vhod"], pragi["prag_suma"], marker="o")
+plt.scatter(pragi["f_vhod"], pragi["prag_suma"],
+            label="Numericna simulacija", zorder=3)
+
+f_vrednosti = np.linspace(0.55, 0.95, 200)
+pragi_teorija = 1 - 3 / np.sqrt(10 - 16 * (f_vrednosti - 0.75)**2)
+
+plt.plot(f_vrednosti, pragi_teorija, label="Analiticna formula")
 
 plt.xlabel("Zacetna zvestoba")
 plt.ylabel("Mejni sum CNOT (lambda)")
 plt.title("Mejna stopnja suma za uspesno ociscevanje")
+plt.legend()
 plt.grid(alpha=0.3)
 plt.tight_layout()
 
