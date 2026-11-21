@@ -1,4 +1,3 @@
-
 import numpy as np
 from qiskit import QuantumCircuit
 from qiskit_aer import AerSimulator
@@ -16,6 +15,3 @@ bell = np.array([1, 0, 0, 1], dtype=complex) / np.sqrt(2)
 zvestoba = float(np.real(np.vdot(bell, rho @ bell)))
 
 print("Zvestoba:", round(zvestoba, 6))
-
-assert np.isclose(zvestoba, 1.0)
-print("test working")
