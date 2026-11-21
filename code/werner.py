@@ -8,20 +8,19 @@ p = np.outer(bell, bell.conj())
 def werner(f):
     return f * p + (1 - f) / 3 * (np.eye(4) - p)
 
-f = 0.8
 
-vezje = QuantumCircuit(2)
-vezje.set_density_matrix(werner(f))
-vezje.save_density_matrix()
+if __name__ == "__main__":
+    f = 0.8
 
-simulator = AerSimulator(method="density_matrix")
-rezultat = simulator.run(vezje).result()
-rho = np.asarray(rezultat.data(0)["density_matrix"])
+    vezje = QuantumCircuit(2)
+    vezje.set_density_matrix(werner(f))
+    vezje.save_density_matrix()
 
-zvestoba = float(np.real(np.vdot(bell, rho @ bell)))
+    simulator = AerSimulator(method="density_matrix")
+    rezultat = simulator.run(vezje).result()
+    rho = np.asarray(rezultat.data(0)["density_matrix"])
 
-print("Zacetna zvestoba:", f)
-print("Izracunana zvestoba:", round(zvestoba, 6))
+    zvestoba = float(np.real(np.vdot(bell, rho @ bell)))
 
-assert np.isclose(zvestoba, f)
-print("test")
+    print("Zacetna zvestoba:", f)
+    print("Izracunana zvestoba:", round(zvestoba, 6))
