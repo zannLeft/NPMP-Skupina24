@@ -12,13 +12,13 @@ rezultati = podatki[podatki["f_vhod"] == f].sort_values("sum_cnot")
 plt.figure(figsize=(7, 4.5))
 
 plt.plot(rezultati["sum_cnot"], rezultati["f_izhod"],
-         marker="o", label="Po ociscevanju")
+         marker="o", label="Po očiščevanju")
 
-plt.axhline(f, linestyle="--", color="gray", label="Zacetna zvestoba")
+plt.axhline(f, linestyle="--", color="gray", label="Začetna zvestoba")
 
-plt.xlabel("Sum CNOT (lambda)")
+plt.xlabel("Šum CNOT (λ)")
 plt.ylabel("Zvestoba")
-plt.title("Vpliv suma CNOT pri F = 0.80")
+plt.title("Vpliv šuma CNOT pri F = 0,80")
 plt.legend()
 plt.grid(alpha=0.3)
 plt.tight_layout()
@@ -40,9 +40,9 @@ for f in sorted(podatki["f_vhod"].unique()):
 
 plt.axhline(0, linestyle="--", color="gray")
 
-plt.xlabel("Sum CNOT (lambda)")
+plt.xlabel("Šum CNOT (λ)")
 plt.ylabel("Sprememba zvestobe")
-plt.title("Izboljsanje zvestobe pri razlicnih vhodnih stanjih")
+plt.title("Izboljšanje zvestobe pri različnih vhodnih stanjih")
 plt.legend(bbox_to_anchor=(1.02, 1), loc="upper left")
 plt.grid(alpha=0.3)
 plt.tight_layout()
@@ -57,16 +57,16 @@ pragi = pd.read_csv(pot / "results" / "pragi.csv")
 plt.figure(figsize=(7, 4.5))
 
 plt.scatter(pragi["f_vhod"], pragi["prag_suma"],
-            label="Numericna simulacija", zorder=3)
+            label="Numerična simulacija", zorder=3)
 
 f_vrednosti = np.linspace(0.55, 0.95, 200)
 pragi_teorija = 1 - 3 / np.sqrt(10 - 16 * (f_vrednosti - 0.75)**2)
 
-plt.plot(f_vrednosti, pragi_teorija, label="Analiticna formula")
+plt.plot(f_vrednosti, pragi_teorija, label="Analitična formula")
 
-plt.xlabel("Zacetna zvestoba")
-plt.ylabel("Mejni sum CNOT (lambda)")
-plt.title("Mejna stopnja suma za uspesno ociscevanje")
+plt.xlabel("Začetna zvestoba")
+plt.ylabel("Mejni šum CNOT (λ)")
+plt.title("Mejna stopnja šuma za uspešno očiščevanje")
 plt.legend()
 plt.grid(alpha=0.3)
 plt.tight_layout()
@@ -97,9 +97,9 @@ plt.plot(stevila, odkloni_teorija, marker="s", linestyle="--", label="Teorija")
 plt.xscale("log", base=2)
 plt.xticks(stevila, [str(n) for n in stevila])
 
-plt.xlabel("Stevilo meritev")
+plt.xlabel("Število meritev")
 plt.ylabel("Standardni odklon ocene P")
-plt.title("Statisticna negotovost meritev")
+plt.title("Statistična negotovost meritev")
 plt.legend()
 plt.grid(alpha=0.3)
 plt.tight_layout()
