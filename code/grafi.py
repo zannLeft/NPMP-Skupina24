@@ -74,4 +74,37 @@ plt.tight_layout()
 plt.savefig(slike / "pragi_suma.pdf")
 plt.savefig(slike / "pragi_suma.png", dpi=200)
 
+
+meritve = pd.read_csv(pot / "results" / "meritve.csv")
+
+stevila = sorted(meritve["shots"].unique())
+odkloni = []
+odkloni_teorija = []
+
+for n in stevila:
+    izbrane = meritve[meritve["shots"] == n]
+
+    odkloni.append(izbrane["p_ocena"].std(ddof=1))
+
+    p = izbrane["p_natancno"].iloc[0]
+    odkloni_teorija.append(np.sqrt(p * (1 - p) / n))
+
+plt.figure(figsize=(7, 4.5))
+
+plt.plot(stevila, odkloni, marker="o", label="Simulacija")
+plt.plot(stevila, odkloni_teorija, marker="s", linestyle="--", label="Teorija")
+
+plt.xscale("log", base=2)
+plt.xticks(stevila, [str(n) for n in stevila])
+
+plt.xlabel("Stevilo meritev")
+plt.ylabel("Standardni odklon ocene P")
+plt.title("Statisticna negotovost meritev")
+plt.legend()
+plt.grid(alpha=0.3)
+plt.tight_layout()
+
+plt.savefig(slike / "odklon_meritev.pdf")
+plt.savefig(slike / "odklon_meritev.png", dpi=200)
+
 plt.show()
